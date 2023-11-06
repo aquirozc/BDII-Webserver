@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" id="formulario">
+        <div>
+          <label for="rfc">RFC:</label>
+          <input type="text" id="rfc" name="rfc" required>
+        </div>
+        <div>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div>
+          <label for="apellido">Apellido:</label>
+          <input type="text" id="apellido" name="apellido" required>
+        </div>
+        <div>
+          <label for="telefono">Número de teléfono:</label>
+          <input type="tel" id="telefono" name="numerodetelefono" required>
+        </div>
+        <div>
+          <label for="correo">Correo:</label>
+          <input type="email" id="correo" name="correo" required>
+        </div>
+        <div>
+          <label for="fecha">Fecha de nacimiento:</label>
+          <input type="date" id="fechadenacimiento" name="fechadenacimiento" required>
+        </div>
+        <div>
+          <label for="genero">Género:</label>
+          <select id="genero" name="genero" required>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="O">Otro</option>
+          </select>
+        </div>
+        <div>
+          <label for="direccion">Dirección_id:</label>
+          <input type="text" id="direccion" name="direccion_id" required>
+        </div>
+        <div>
+          <label for="usuario">Usuario:</label>
+          <input type="text" id="usuario" name="usuario" required>
+        </div>
+        <div>
+          <label for="contraseña">Contraseña:</label>
+          <input type="password" id="contraseña" name="contraseña" required>
+        </div>
+        <div>
+          <input type="submit" value="Enviar">
+        </div>
+      </form>
+
+      <script>
+        var formulario = document.getElementById("formulario");
+        formulario.addEventListener("submit", event => {
+            event.preventDefault();
+            alert
+
+        // Crear un objeto XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+
+        // Especificar el método, la url y el tipo de respuesta
+        xhr.open("POST", "http://192.168.0.220:8080/api/consumer/signin");
+        xhr.responseType = "text";
+
+        // Crear un objeto FormData con los datos del formulario
+        var formData = new FormData(formulario);
+
+        // Convertir el objeto FormData en un objeto plano
+        var object = {};
+        formData.forEach((value, key) => object[key] = value);
+
+        // Convertir el objeto plano en una cadena json
+        var json = JSON.stringify(object);
+        console.log(json);
+        // Enviar la solicitud con los datos json
+        xhr.send(json);
+        xhr.onload = function() {
+    if (xhr.status == 200) {
+      // La solicitud fue exitosa
+      console.log(xhr)
+    } else {
+      // Hubo un error en la solicitud
+      console.error(xhr.status, xhr.statusText);
+    }
+    } ;
+        });
+      </script>
+</body>
+</html>
